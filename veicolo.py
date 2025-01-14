@@ -6,6 +6,7 @@ listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA 
 listaColore = ["nero", "bianco", "rosso", "blu", "verde", " fucsia", "arancione", "gialla", "viola", "grigio"]
 listaAlimentazione = ["Diesel", "Ibrido", "Elettrico", "Benzina"]
 alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
+numeri = "1234567890"
 class Veicolo:
     def __init__(self, targa):
         self.__marca = "Fiat"
@@ -16,8 +17,10 @@ class Veicolo:
         listaTarga = []
         for x in targa:
             listaTarga.append(x)
-            if 
-        self.__targa = targa.upper()
+            if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
+                self.__targa = targa.upper()
+            else:
+                raise ValueError("Targa non valida")
         
     #funzione necessaria per visualizzare la classe
     def __str__(self):
