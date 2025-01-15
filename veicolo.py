@@ -24,6 +24,9 @@ class Veicolo:
             else:
                 raise ValueError("Targa non valida")
         
+        veicolo = (self.__marca, self.__modello, self.__cilindrata)
+        listaVeicoli.append(veicolo)
+        
     #funzione necessaria per visualizzare la classe
     def __str__(self):
         return self.__class__.__name__ + str(self.__dict__)
@@ -86,18 +89,13 @@ class Veicolo:
         
     @cilindrata.setter
     def cilindrata(self, value):
-        if value // 100 != 0 or type(value) != int or value < 0:
         if value % 100 != 0 or type(value) != int or value < 0:
             raise ValueError ("La cilindrata non è un intero positivo multiplo di 100.")
         
         self.__cilindrata = value
+
         return 
-        
-#     #ORDINAMENTO IMPLICITO
-#     veicolo = (self.__marca, self.__modello, self.__cilindrata)
-#     listaVeicoli.append(veicolo)
-#     listaVeicoli.sort()
-#     
+    
 if "__main__" == __name__:
     v1 = Veicolo("AD 123 SE")
     v2 = Veicolo("AS 345 WS")
