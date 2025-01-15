@@ -78,7 +78,7 @@ class Veicolo:
         return 
     
     
-    #è possibile camabiare il modello
+    #è possibile cambiare il modello
     @modello.setter
     def modello(self, value):
         self.__modello = value
