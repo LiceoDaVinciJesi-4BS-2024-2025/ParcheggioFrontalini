@@ -58,11 +58,14 @@ class Veicolo:
             raise ValueError ("La marca non è presente")
         
         self.__marca = value.upper()
+
         return 
+    
     
     @modello.setter
     def modello(self, value):
         self.__modello = value
+
         return
     
     @colore.setter
@@ -84,6 +87,7 @@ class Veicolo:
     @cilindrata.setter
     def cilindrata(self, value):
         if value // 100 != 0 or type(value) != int or value < 0:
+        if value % 100 != 0 or type(value) != int or value < 0:
             raise ValueError ("La cilindrata non è un intero positivo multiplo di 100.")
         
         self.__cilindrata = value
@@ -96,9 +100,9 @@ class Veicolo:
 #     
 if "__main__" == __name__:
     v1 = Veicolo("AD 123 SE")
-    print(v1)
     v2 = Veicolo("AS 345 WS")
     v2.marca = "Ferrari"
+    v2.cilindrata = 1500
     print(v2)
-    
-        
+    print(v1)
+
