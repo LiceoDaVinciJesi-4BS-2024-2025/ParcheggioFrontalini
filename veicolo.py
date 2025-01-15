@@ -4,19 +4,21 @@
 
 listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "SUZUKI", "PEUGEOT", "HARLEY-DAVIDSON"]
 listaColore = ["nero", "bianco", "rosso", "blu", "verde", " fucsia", "arancione", "gialla", "viola", "grigio"]
-listaAlimentazione = ["Diesel", "Ibrido", "Elettrico", "Benzina"]
+listaAlimentazione = ["diesel", "ibrido", "elettrico", "benzina"]
 alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
 numeri = "1234567890"
+listaVeicoli = []
 class Veicolo:
     def __init__(self, targa):
-        self.__marca = "Fiat"
+        self.__marca = "FIAT"
         self.__modello = "Panda"
-        self.__colore = "Fucsia"
+        self.__colore = "fucsia"
         self.__cilindrata = 1000
-        self.__alimentazione = "Diesel"
+        self.__alimentazione = "diesel"
         listaTarga = []
         for x in targa:
             listaTarga.append(x)
+        for x in listaTarga:
             if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
                 self.__targa = targa.upper()
             else:
@@ -52,10 +54,10 @@ class Veicolo:
     
     @marca.setter
     def marca(self, value):
-        if value not in listaMarca:
+        if value.upper() not in listaMarca:
             raise ValueError ("La marca non è presente")
         
-        self.__marca = value
+        self.__marca = value.upper()
         return 
     
     @modello.setter
@@ -65,10 +67,10 @@ class Veicolo:
     
     @colore.setter
     def colore(self, value):
-        if value not in listaColore:
+        if value.lower() not in listaColore:
             raise ValueError ("Il colore non è presente")
         
-        self.__colore = value
+        self.__colore = value.lower()
         return
     
     @alimentazione.setter
@@ -87,4 +89,16 @@ class Veicolo:
         self.__cilindrata = value
         return 
         
+#     #ORDINAMENTO IMPLICITO
+#     veicolo = (self.__marca, self.__modello, self.__cilindrata)
+#     listaVeicoli.append(veicolo)
+#     listaVeicoli.sort()
+#     
+if "__main__" == __name__:
+    v1 = Veicolo("AD 123 SE")
+    print(v1)
+    v2 = Veicolo("AS 345 WS")
+    v2.marca = "Ferrari"
+    print(v2)
+    
         
