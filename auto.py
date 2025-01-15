@@ -5,7 +5,7 @@
 from veicolo import Veicolo
 
 class Auto(Veicolo):
-    def __init__(self, targa, numeroMaxPasseggeri, numeroPasseggeriTrasportati, maxCapacitàTrasporto):
+    def __init__(self, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
         super().__init__(marca, modello, colore, cilindrata, alimentazione, targa)
         if numeroMaxPasseggeri < 0 and numeroMaxPassegeri > 9:
             raise ValueError ("Non è possibile")
@@ -36,8 +36,8 @@ class Auto(Veicolo):
         self.__numeroMaxPasseggeri = value
         return
     
-     @numeroPasseggeriTrasportati.setter
-     def numeroPasseggeriTrasportati(self, value):
+    @numeroPasseggeriTrasportati.setter
+    def numeroPasseggeriTrasportati(self, value):
         if value > numeroMaxPasseggeri:
             raise ValueError ("Non è possibile")
         self.__numeroPasseggeriTrasportati = value
@@ -48,4 +48,6 @@ class Auto(Veicolo):
         self.__maxCapacitàTrasporto = value
         return
     
-    
+if "__main__" == __name__:
+    a1 = Auto("QW 562 QB", 4, 2, 10000)
+    print(a1)
