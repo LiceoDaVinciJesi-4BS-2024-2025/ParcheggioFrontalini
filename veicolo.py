@@ -96,16 +96,16 @@ class Veicolo:
 
         return
     
-    def __lt__(self, other):
-        if self.__marca == other.__marca:
-            if self.__modello == other.__modello:
-                return self.__cilindrata < other.__cilindrata
-            return self.__modello < other.__modello
-        return self.__marca < other.__marca
-    
-    def __repr__(self):
-        return f"Veicolo(marca={self.marca}, modello={self.modello}, targa={self.targa})"
-    
+#     def __lt__(self, other):
+#         if self.__marca == other.__marca:
+#             if self.__modello == other.__modello:
+#                 return self.__cilindrata < other.__cilindrata
+#             return self.__modello < other.__modello
+#         return self.__marca < other.__marca
+#     
+#     def __repr__(self):
+#         return f"Veicolo(marca={self.marca}, modello={self.modello}, targa={self.targa})"
+#     
 if "__main__" == __name__:
     v1 = Veicolo("AD 123 SE")
     v2 = Veicolo("AS 345 WS")

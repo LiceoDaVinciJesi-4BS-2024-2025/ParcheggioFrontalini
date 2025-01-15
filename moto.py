@@ -6,8 +6,8 @@ from veicolo import Veicolo
 
 class Moto(Veicolo):
     def __init__(self, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
-        super().__init__(marca, modello, colore, cilindrata, alimentazione, targa)
-        if numeroMaxPasseggeri <= 0 and numeroMaxPassegeri >= 3:
+        super().__init__(targa)
+        if numeroMaxPasseggeri <= 0 or numeroMaxPasseggeri >= 3:
             raise ValueError ("Non è possibile")
         else:
             self.__numeroMaxPasseggeri = numeroMaxPasseggeri
@@ -50,4 +50,6 @@ class Moto(Veicolo):
     
 if "__main__" == __name__:
     m1 = Moto("XW 491 JR", 2, 2, 400)
-    print(a1)
+    print(m1)
+#     m2 = Moto("XP 491 JR", 4, 2, 400)
+#     print(m2)
