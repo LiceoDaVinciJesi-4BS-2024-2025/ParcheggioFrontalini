@@ -7,7 +7,7 @@ from veicolo import Veicolo
 class Auto(Veicolo):
     def __init__(self, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
         super().__init__(marca, modello, colore, cilindrata, alimentazione, targa)
-        if numeroMaxPasseggeri < 0 and numeroMaxPassegeri > 9:
+        if numeroMaxPasseggeri =< 0 and numeroMaxPassegeri >= 9:
             raise ValueError ("Non è possibile")
         else:
             self.__numeroMaxPasseggeri = numeroMaxPasseggeri
@@ -31,7 +31,7 @@ class Auto(Veicolo):
     
     @numeroMaxPasseggeri.setter
     def numeroMaxPasseggeri(self, value):
-        if value < 0 and value > 9:
+        if value =< 0 and value >= 9:
             raise ValueError ("Non è possibile")
         self.__numeroMaxPasseggeri = value
         return
