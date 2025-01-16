@@ -6,7 +6,6 @@
 listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "SUZUKI", "PEUGEOT", "HARLEY-DAVIDSON"]
 listaColore = ["nero", "bianco", "rosso", "blu", "verde", " fucsia", "arancione", "gialla", "viola", "grigio"]
 listaAlimentazione = ["diesel", "ibrido", "elettrico", "benzina"]
-listaVeicoli = []
 
 #creazione della stringa alfabeto e numeri
 alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
@@ -40,6 +39,9 @@ class Veicolo:
     #funzione necessaria per visualizzare la classe
     def __str__(self):
         return self.__class__.__name__ + str(self.__dict__)
+    
+    def __repr__(self):
+        return str(self.__dict__)
     
     #imposto le proprietà su marca, modello, colore, cilindrata, alimentazione, targa
     @property
@@ -112,25 +114,16 @@ class Veicolo:
 
         return
     
-    marca = []
-    modello = []
     def __lt__(self, other):
-#         for lettera in self.__marca:
-#             marca.append(lettera)
-#         for lettera in self.__modello:
-#             modello.append(lettera)
         if self.__marca < other.__marca:
-            listaVeicoli.append(self.__marca, self.__modello, self.__cilindrata)
-             return listaVeicoli
+            return True
         elif self.__marca == other.__marca:
             if self.__modello < other.__modello:
-                listaVeicoli.append(self.__marca, self.__modello, self.__cilindrata)
-                return listaVeicoli
+                return True
             elif self.__modello == other.__modello:
                 if self.__cilindrata < self.__cilindrata:
-                    listaVeicoli.append(self.__marca, self.__modello, self.__cilindrata)
-                    return listaVeicoli
-
+                    return True
+        return False
 #     def __repr__(self):
 #         return f"Veicolo(marca={self.marca}, modello={self.modello}, targa={self.targa})"
 #
@@ -142,6 +135,9 @@ if "__main__" == __name__:
     v2.cilindrata = 1500
     print(v2)
     print(v1)
-    ordinamento = v1 < v2
-    print(ordinamento)
+    lista = [v1, v2]
+    lista.sort()
+    print(lista)
+    
+    
 
