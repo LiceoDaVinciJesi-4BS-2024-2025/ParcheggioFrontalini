@@ -114,19 +114,27 @@ class Veicolo:
 
         return
     
+    #ordinamento dei veicoli
     def __lt__(self, other):
+        #se la marca di uno è minore dell'altro
         if self.__marca < other.__marca:
+            #ritorna true
             return True
+        #se la marca è = all'altra..
         elif self.__marca == other.__marca:
+            #..e il modello è minore
             if self.__modello < other.__modello:
+                #ritorna true
                 return True
+            #se il modello è = all'altra..
             elif self.__modello == other.__modello:
+                #.. e la cilindrata è minore
                 if self.__cilindrata < self.__cilindrata:
+                    #ritorna true
                     return True
+        #riotnra false
         return False
-#     def __repr__(self):
-#         return f"Veicolo(marca={self.marca}, modello={self.modello}, targa={self.targa})"
-#
+
 #Faccio i test
 if "__main__" == __name__:
     v1 = Veicolo("AD 123 SE")
