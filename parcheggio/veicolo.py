@@ -112,13 +112,25 @@ class Veicolo:
 
         return
     
-#     def __lt__(self, other):
-#         if self.__marca == other.__marca:
-#             if self.__modello == other.__modello:
-#                 return self.__cilindrata < other.__cilindrata
-#             return self.__modello < other.__modello
-#         return self.__marca < other.__marca
-#     
+    marca = []
+    modello = []
+    def __lt__(self, other):
+#         for lettera in self.__marca:
+#             marca.append(lettera)
+#         for lettera in self.__modello:
+#             modello.append(lettera)
+        if self.__marca < other.__marca:
+            listaVeicoli.append(self.__marca, self.__modello, self.__cilindrata)
+             return listaVeicoli
+        elif self.__marca == other.__marca:
+            if self.__modello < other.__modello:
+                listaVeicoli.append(self.__marca, self.__modello, self.__cilindrata)
+                return listaVeicoli
+            elif self.__modello == other.__modello:
+                if self.__cilindrata < self.__cilindrata:
+                    listaVeicoli.append(self.__marca, self.__modello, self.__cilindrata)
+                    return listaVeicoli
+
 #     def __repr__(self):
 #         return f"Veicolo(marca={self.marca}, modello={self.modello}, targa={self.targa})"
 #
@@ -130,4 +142,6 @@ if "__main__" == __name__:
     v2.cilindrata = 1500
     print(v2)
     print(v1)
+    ordinamento = v1 < v2
+    print(ordinamento)
 
