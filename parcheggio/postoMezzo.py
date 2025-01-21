@@ -4,6 +4,9 @@
 
 #importo datetime
 import datetime
+#creazione della stringa alfabeto e numeri
+alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
+numeri = "1234567890"
 
 #inserisco tipologia accettabili
 tipo = ["auto", "moto"]
@@ -12,14 +15,21 @@ tipo = ["auto", "moto"]
 class PostoMezzo:
     #funzione iniziale
     def __init__(self, tipologia):
-        #imposto targa vuota
-        self.__targaMezzoParcheggiato = ""
+    
         #controllo con la tipologia inserita sia allì'interno della lista delle tipologie accettabili
         if tipologia.lower() not in tipo:
             raise ValueError("La tipologia non è presente")
         self.__tipologia = tipologia
+        
+        #imposto targa vuota
+        self.__targa = ""
+        
         #imposto data e ora in cui inserisce la macchina
-        self.__datetime = ""
+        self.__data = ""
+    
+    #funzione necessaria per visualizzare la classe
+    def __str__(self):
+        return self.__class__.__name__ + str(self.__dict__)
     
     #imposto le property di tipologia, targaMezzoParcheggio, datetime
     @property
@@ -27,12 +37,12 @@ class PostoMezzo:
         return tipologia
     
     @property
-    def targaMezzoParcheggiato(self):
-        return targaMezzoParcheggiato
+    def targa(self):
+        return targa
     
     @property
-    def datetime(self):
-        return datetime
+    def data(self):
+        return data
     
     #imposto le setter
     #controllo che il valore sia all'interno della lista tipo, in caso contrario ritorna errore
@@ -42,10 +52,11 @@ class PostoMezzo:
             raise ValueError("La tipologia non è presente")
         self.__tipologia = value
     
+    
     #controllo che la targa sia del tipo "AB 123 CD", in caso contrario ritorna errore
-    @targaMezzoParcheggiato.setter
-    listaTarga = []
-    def targaMezzoParcheggiato(self, value) :
+    @targa.setter
+    def targa(self, value):
+        listaTarga = []
         for x in value:
             listaTarga.append(x)
         #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
@@ -56,9 +67,16 @@ class PostoMezzo:
                 raise ValueError("Targa non valida")
     
     #datetime
-    @datetime.setter
-    def datetime(self, value):
-        self.__datetime = value
+    @data.setter
+    def data(self, value):
+        if type(value) != datetime.datetime or value > datetime.datetime.now():
+            raise ValueError("Data/Ora non valida")
+        self.__data = value
         return 
             
-    
+if __name__ == "__main__":
+    p1 = PostoMezzo("auto")
+    print(p1)
+    p1.targa = "AB 347 DF"
+    p1.data = datetime.datetime(2025, 1, 20, 20, 18, 00)
+    print(p1)
