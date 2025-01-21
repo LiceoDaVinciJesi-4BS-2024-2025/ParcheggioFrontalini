@@ -25,6 +25,8 @@ class PostoMezzo:
         self.__targa = targa
         
         #imposto data e ora in cui inserisce la macchina
+        if type(data) != datetime.datetime or data < datetime.datetime.now():
+            raise ValueError("Data/Ora non valida")
         self.__data = data
     
     #funzione necessaria per visualizzare la classe
@@ -34,15 +36,15 @@ class PostoMezzo:
     #imposto le property di tipologia, targaMezzoParcheggio, datetime
     @property
     def tipologia(self):
-        return tipologia
+        return self.__tipologia
     
     @property
     def targa(self):
-        return targa
+        return self.__targa
     
     @property
     def data(self):
-        return data
+        return self.__data
     
     #imposto le setter
     #controllo che il valore sia all'interno della lista tipo, in caso contrario ritorna errore
@@ -69,7 +71,7 @@ class PostoMezzo:
     #datetime
     @data.setter
     def data(self, value):
-        if type(value) != datetime.datetime or value > datetime.datetime.now():
+        if type(value) != datetime.datetime or value < datetime.datetime.now():
             raise ValueError("Data/Ora non valida")
         self.__data = value
         return 

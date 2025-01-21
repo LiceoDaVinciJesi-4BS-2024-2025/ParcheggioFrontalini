@@ -30,15 +30,15 @@ class Auto(Veicolo):
     #imposto le proprietà su numeroMaxPasseggeri, numeroPasseggeriTrasportati e maxCapacitàTrasporto
     @property
     def numeroMaxPasseggeri(self):
-        return numeroMaxPasseggeri
+        return self.__numeroMaxPasseggeri
     
     @property
     def numeroPasseggeriTrasportati(self):
-        return numeroPasseggeriTrasportati
+        return self.__numeroPasseggeriTrasportati
     
     @property
     def maxCapacitàTrasporto(self):
-        return maxCapacitàTrasporto
+        return self.__maxCapacitàTrasporto
     
     #imposto le setter
     

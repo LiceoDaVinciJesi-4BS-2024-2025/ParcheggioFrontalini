@@ -58,15 +58,15 @@ class Veicolo:
     
     @property
     def cilindrata(self):
-        return cilindrata
+        return self.__cilindrata
     
     @property
     def alimentazione(self):
-        return alimentazione
+        return self.__alimentazione
     
     @property
     def targa(self):
-        return targa
+        return self.__targa
     
     #imposto le setter
     
