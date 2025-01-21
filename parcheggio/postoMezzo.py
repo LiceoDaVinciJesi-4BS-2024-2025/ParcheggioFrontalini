@@ -14,7 +14,7 @@ tipo = ["auto", "moto"]
 #classe PostoMezzo
 class PostoMezzo:
     #funzione iniziale
-    def __init__(self, tipologia):
+    def __init__(self, tipologia, targa, data):
     
         #controllo con la tipologia inserita sia allì'interno della lista delle tipologie accettabili
         if tipologia.lower() not in tipo:
@@ -22,10 +22,10 @@ class PostoMezzo:
         self.__tipologia = tipologia
         
         #imposto targa vuota
-        self.__targa = ""
+        self.__targa = targa
         
         #imposto data e ora in cui inserisce la macchina
-        self.__data = ""
+        self.__data = data
     
     #funzione necessaria per visualizzare la classe
     def __str__(self):
@@ -75,7 +75,7 @@ class PostoMezzo:
         return 
             
 if __name__ == "__main__":
-    p1 = PostoMezzo("auto")
+    p1 = PostoMezzo("auto", " ", " ")
     print(p1)
     p1.targa = "AB 347 DF"
     p1.data = datetime.datetime(2025, 1, 20, 20, 18, 00)
