@@ -3,7 +3,7 @@
 #Classe Veicolo
 
 #creazione delle liste che mi servono per la classe veicolo -> Marca, Colore, Alimentazione
-listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "SUZUKI", "PEUGEOT", "HARLEY-DAVIDSON"]
+listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
 listaColore = ["nero", "bianco", "rosso", "blu", "verde", " fucsia", "arancione", "gialla", "viola", "grigio"]
 listaAlimentazione = ["diesel", "ibrido", "elettrico", "benzina"]
 
@@ -15,7 +15,7 @@ numeri = "1234567890"
 class Veicolo:
     #funzione iniziale con parametri self e targa
     def __init__(self, targa):
-        #impostazione della marca, modello, colore, cilindraata, alimentazione a mia scelta
+        #impostazione della marca, modello, colore, cilindrata, alimentazione a mia scelta
         self.__marca = "FIAT"
         self.__modello = "Panda"
         self.__colore = "fucsia"
@@ -46,15 +46,15 @@ class Veicolo:
     #imposto le proprietà su marca, modello, colore, cilindrata, alimentazione, targa
     @property
     def marca(self):
-        return marca
+        return self.__marca
     
     @property
     def modello(self):
-        return modello
+        return self.__modello
     
     @property
     def colore(self):
-        return colore
+        return self.__colore
     
     @property
     def cilindrata(self):

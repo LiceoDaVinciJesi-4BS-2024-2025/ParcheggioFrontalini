@@ -22,12 +22,12 @@ class PostoMezzo:
         self.__tipologia = tipologia
         
         #imposto targa vuota
-        self.__targa = targa
+        self.__targa = " "
         
         #imposto data e ora in cui inserisce la macchina
-        if type(data) != datetime.datetime or data < datetime.datetime.now():
-            raise ValueError("Data/Ora non valida")
-        self.__data = data
+
+        self.__dataInizioParcheggio = None
+        self.__dataFineParcheggio = None
     
     #funzione necessaria per visualizzare la classe
     def __str__(self):
@@ -54,30 +54,34 @@ class PostoMezzo:
             raise ValueError("La tipologia non è presente")
         self.__tipologia = value
     
-    
-    #controllo che la targa sia del tipo "AB 123 CD", in caso contrario ritorna errore
-    @targa.setter
-    def targa(self, value):
-        listaTarga = []
-        for x in value:
-            listaTarga.append(x)
-        #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
-        for x in listaTarga:
-            if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
-                self.__targa = value
-            else:
-                raise ValueError("Targa non valida")
-    
     #datetime
     @data.setter
     def data(self, value):
         if type(value) != datetime.datetime or value < datetime.datetime.now():
             raise ValueError("Data/Ora non valida")
         self.__data = value
-        return 
+        return
+    
+    def postoOccupato(self):
+        if self.__targa == "":
+            return False
+        return True
+    
+    def liberaPosto(self):
+        self.__targa == ""
+        
+    def occupato(self, targa):
+        if targa != " ":
+            self.__targa = targa
+            self.__dataInizioParcheggio = datetime.datetime.now()
+            return True
+        return False
+    
+        
+        
             
 if __name__ == "__main__":
-    p1 = PostoMezzo("auto", " ", " ")
+    p1 = PostoMezzo("auto", " ", "None")
     print(p1)
     p1.targa = "AB 347 DF"
     p1.data = datetime.datetime(2025, 1, 20, 20, 18, 00)
