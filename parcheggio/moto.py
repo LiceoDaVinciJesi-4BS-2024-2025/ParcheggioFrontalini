@@ -42,13 +42,13 @@ class Moto(Veicolo):
     
     #imposto le setter
     
-    #è possibile cambiare il numero massimo di passeggeri se è compreso tra 0 e 3 esclusi sennò ritorna errore
-    @numeroMaxPasseggeri.setter
-    def numeroMaxPasseggeri(self, value):
-        if value <= 0 and value >= 3:
-            raise ValueError ("Non è possibile")
-        self.__numeroMaxPasseggeri = value
-        return
+#     #è possibile cambiare il numero massimo di passeggeri se è compreso tra 0 e 3 esclusi sennò ritorna errore
+#     @numeroMaxPasseggeri.setter
+#     def numeroMaxPasseggeri(self, value):
+#         if value <= 0 and value >= 3:
+#             raise ValueError ("Non è possibile")
+#         self.__numeroMaxPasseggeri = value
+#         return
     
     #è possibile cambiare  il numero di passegeri trasportati se è minore del numero massimo di passeggeri sennò ritorna errore
     @numeroPasseggeriTrasportati.setter

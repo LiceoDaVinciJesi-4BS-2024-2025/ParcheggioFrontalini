@@ -14,7 +14,7 @@ tipo = ["auto", "moto"]
 #classe PostoMezzo
 class PostoMezzo:
     #funzione iniziale
-    def __init__(self, tipologia, targa, data):
+    def __init__(self, tipologia, targa):
     
         #controllo con la tipologia inserita sia allì'interno della lista delle tipologie accettabili
         if tipologia.lower() not in tipo:
@@ -62,24 +62,21 @@ class PostoMezzo:
         self.__data = value
         return
     
-    def postoOccupato(self):
+    def occupaPosto(self, targa):
+        self.__targa = targa
+        self.__dataInizioParcheggio = datetime.datetime.now()
+        return
+    
+    def liberaPosto(self, targa, data):
+        self.__targa = targa
+        self.__dataFineParcheggio = datetime.datetime.now()
+        return
+    
+    def occupato(self):
         if self.__targa == "":
             return False
         return True
-    
-    def liberaPosto(self):
-        self.__targa == ""
-        
-    def occupato(self, targa):
-        if targa != " ":
-            self.__targa = targa
-            self.__dataInizioParcheggio = datetime.datetime.now()
-            return True
-        return False
-    
-        
-        
-            
+             
 if __name__ == "__main__":
     p1 = PostoMezzo("auto", " ", "None")
     print(p1)

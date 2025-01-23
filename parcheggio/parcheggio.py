@@ -19,6 +19,7 @@ class Parcheggio:
     def __init__(self, nomeParcheggio):
         #imposto postiLiberiAuto, postiLiberiMoto e guadagnoParcheggio
         self.__nomeParcheggio = nomeParcheggio
+        #lista di posti mezzo 
         self.__postiLiberiAuto = 1000
         self.__postiLiberiMoto = 200
         self.__guadagnoParcheggio = 0
@@ -49,7 +50,7 @@ class Parcheggio:
         if mezzo.marca in listaAuto:
             #.. e ci sono ancora posti liberi Auto
             if self.__postiLiberiAuto > 0:
-                mezzo.PostoMezzo.occupa(mezzo.targa)
+                mezzo.occupaPosto(mezzo.targa)
                 #tolgo un posto dai postiLiberi
                 self.__postiLiberiAuto -= 1
                 #calcolo il numeroOreSosta -> data impostata - quella di ora -> calcolo i seconfi e divido per 3600 per trovare le ore
@@ -60,7 +61,7 @@ class Parcheggio:
                 self.__guadagnoParcheggio += saldo
                 #aggiungo alla lista di prenotazione le caratteristiche del mezzo, numero di ore e saldo 
                 listaPrenotazionePosto.append((mezzo.tipologia, mezzo.targa, numeroOreSosta, saldo))
-                #aggo
+                
                 listaCSV.append({"veicolo": (mezzo.tipologia, mezzo.targa, numeroOreSosta, saldo), "totaleGuadagno" : self.__guadagnoParcheggio})
                 return listaPrenotazionePosto
             else:
