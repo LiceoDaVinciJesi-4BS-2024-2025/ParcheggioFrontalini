@@ -68,5 +68,6 @@ class Moto(Veicolo):
 if "__main__" == __name__:
     m1 = Moto("XW 491 JR", 2, 2, 400)
     print(m1)
+    
 #     m2 = Moto("XP 491 JR", 4, 2, 400)
 #     print(m2)

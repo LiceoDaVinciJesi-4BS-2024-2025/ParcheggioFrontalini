@@ -14,15 +14,10 @@ tipo = ["auto", "moto"]
 #classe PostoMezzo
 class PostoMezzo:
     #funzione iniziale
-    def __init__(self, tipologia, targa):
-    
-        #controllo con la tipologia inserita sia allì'interno della lista delle tipologie accettabili
-        if tipologia.lower() not in tipo:
-            raise ValueError("La tipologia non è presente")
-        self.__tipologia = tipologia
+    def __init__(self):
         
         #imposto targa vuota
-        self.__targa = " "
+        self.__targa = ""
         
         #imposto data e ora in cui inserisce la macchina
 
@@ -33,34 +28,17 @@ class PostoMezzo:
     def __str__(self):
         return self.__class__.__name__ + str(self.__dict__)
     
-    #imposto le property di tipologia, targaMezzoParcheggio, datetime
-    @property
-    def tipologia(self):
-        return self.__tipologia
+    def __repr__(self):
+         return self.__class__.__name__ + str(self.__dict__)
+    
     
     @property
     def targa(self):
         return self.__targa
     
     @property
-    def data(self):
-        return self.__data
-    
-    #imposto le setter
-    #controllo che il valore sia all'interno della lista tipo, in caso contrario ritorna errore
-    @tipologia.setter
-    def tipologia(self, value):
-        if value.lower() not in tipo:
-            raise ValueError("La tipologia non è presente")
-        self.__tipologia = value
-    
-    #datetime
-    @data.setter
-    def data(self, value):
-        if type(value) != datetime.datetime or value < datetime.datetime.now():
-            raise ValueError("Data/Ora non valida")
-        self.__data = value
-        return
+    def dataInizioParcheggio(self):
+        return self.__dataInizioParcheggio
     
     def occupaPosto(self, targa):
         self.__targa = targa
