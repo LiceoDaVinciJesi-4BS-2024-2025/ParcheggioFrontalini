@@ -14,9 +14,12 @@ numeri = "1234567890"
 #Classe Veicolo
 class Veicolo:
     #funzione iniziale con parametri self e targa
-    def __init__(self, targa):
-        #impostazione della marca, modello, colore, cilindrata, alimentazione a mia scelta
-        self.__marca = "FIAT"
+    def __init__(self, marca, targa):
+        #impostazione del modello, colore, cilindrata, alimentazione a mia scelta
+#         if marca.upper() not in listaMarca:
+#             raise ValueError ("La marca non è presente")
+        self.__marca = marca
+        
         self.__modello = "Panda"
         self.__colore = "fucsia"
         self.__cilindrata = 1000
@@ -137,12 +140,14 @@ class Veicolo:
 
 #Faccio i test
 if "__main__" == __name__:
-    v1 = Veicolo("AD 123 SE")
-    v2 = Veicolo("AS 345 WS")
+    v1 = Veicolo("MERCEDES", "AD 123 SE")
+    v2 = Veicolo("FIAT", "AS 345 WS")
+    print(v1)
+    print(v2)
     v2.marca = "Ferrari"
     v2.cilindrata = 1500
-    print(v2)
     print(v1)
+    print(v2)
     lista = [v1, v2]
     lista.sort()
     print(lista)

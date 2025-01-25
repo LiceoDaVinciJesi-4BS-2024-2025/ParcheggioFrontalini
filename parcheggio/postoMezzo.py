@@ -45,7 +45,7 @@ class PostoMezzo:
         self.__dataInizioParcheggio = datetime.datetime.now()
         return
     
-    def liberaPosto(self, targa, data):
+    def liberaPosto(self, targa):
         self.__targa = targa
         self.__dataFineParcheggio = datetime.datetime.now()
         return
