@@ -12,6 +12,8 @@ import csv
 #creo due liste una per la prenotazione del posto e per il csv
 listaPrenotazionePosto = []
 listaCSV = []
+
+# PROF: Questo non dovevi prenderlo dalla classe veicolo??
 listaAuto = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES"]
 #creazione della classe Parcheggio 
 class Parcheggio:
@@ -23,6 +25,7 @@ class Parcheggio:
         self.__postiLiberiAuto = 1000
         self.__postiLiberiMoto = 200
         self.__guadagnoParcheggio = 0
+        # PROF: Ok il numero dei posti... ma i 1000 PostoMezzo per auto e i 200 PostoMezzo per moto... dove sono??
         
     #funzione necessaria per visualizzare la classe
     def __str__(self):
@@ -45,6 +48,7 @@ class Parcheggio:
         return postiLiberiMoto
     
     #funzione di PrenotazionePosto 
+    # PROF: tutta questa cosa... non ha senso
     def occupaPosto(self, mezzo: Veicolo):
         #se la tipologia del mezzo è auto
         if mezzo.marca in listaAuto:

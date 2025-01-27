@@ -14,6 +14,7 @@ numeri = "1234567890"
 #Classe Veicolo
 class Veicolo:
     #funzione iniziale con parametri self e targa
+    # PROF: da come era descritto... qui andava solo la targa. Perché anche la marca? La marca non doveva essere nella lista sopra? Come mai hai commentato via il codice?
     def __init__(self, marca, targa):
         #impostazione del modello, colore, cilindrata, alimentazione a mia scelta
 #         if marca.upper() not in listaMarca:

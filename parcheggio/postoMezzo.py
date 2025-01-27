@@ -46,6 +46,7 @@ class PostoMezzo:
         return
     
     def liberaPosto(self, targa):
+        # PROF: Questa cosa NON libera il posto. if targa == self.__targa: self.__targa = "" e prendi l'ora di fineParcheggio
         self.__targa = targa
         self.__dataFineParcheggio = datetime.datetime.now()
         return
@@ -56,6 +57,7 @@ class PostoMezzo:
         return True
              
 if __name__ == "__main__":
+    # PROF: guarda la init ---> PostoMezzo NON prende parametri. Ma è giusto?? Almeno il tipo... ci vuole, no??
     p1 = PostoMezzo("auto", " ", "None")
     print(p1)
     p1.targa = "AB 347 DF"

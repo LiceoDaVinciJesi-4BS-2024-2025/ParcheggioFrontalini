@@ -6,6 +6,8 @@ from postoMezzo import PostoMezzo
 from veicolo import Veicolo
 from auto import Auto
 from moto import Moto
+
+# PROF: Queste liste andrebbero importate dai rispettivi file...
 listaAuto = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES"]
 listaMoto = ["FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
 
@@ -31,7 +33,7 @@ class Parcheggio:
         return str(self.__dict__)
     
 #     def parcheggia(self, veicolo:Veicolo):
-#         if veicolo.marca in listaAuto:
+#         if veicolo.marca in listaAuto:    # PROF: if isinstance(veicolo, Auto):
 #             # allora è un auto...
 #             for posto in self.__postiAuto:
 #                 if not posto.occupato():
@@ -41,7 +43,7 @@ class Parcheggio:
 #                 # posti auto pieni
 #                 return False
 #         
-#         if veicolo.marca in listaMoto:
+#         if veicolo.marca in listaMoto: #PROF: if isinstance(veicolo, Moto)
 #             # allora è un moto...
 #             for posto in self.__postiMoto:
 #                 if not posto.occupato():
@@ -73,7 +75,7 @@ class Parcheggio:
 #                 return True
 #             
 #             return False
-
+    # PROF: Questo cosa è?? Tu hai un'auto, una moto... un veicolo! Non una marca e una targa
     def parcheggia(self, marcaVeicolo, targaVeicolo):
         if marcaVeicolo in listaAuto:
             # allora è un auto...

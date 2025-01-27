@@ -66,6 +66,7 @@ class Moto(Veicolo):
 
 #I TEST
 if "__main__" == __name__:
+    # PROF: Anche qui, MANCA LA MARCA!!! Ma perché hai "rifatto" la classe veicolo in questo modo??
     m1 = Moto("XW 491 JR", 2, 2, 400)
     print(m1)
     
