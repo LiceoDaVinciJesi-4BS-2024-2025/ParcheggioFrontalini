@@ -14,10 +14,14 @@ tipo = ["auto", "moto"]
 #classe PostoMezzo
 class PostoMezzo:
     #funzione iniziale
-    def __init__(self):
+    def __init__(self, tipoVeicolo):
         
+        if tipoVeicolo not in tipo:
+            raise ValueError("il tipo di veicolo non è accettabile")
+        self:__tipoVeicolo = tipoVeicolo
+            
         #imposto targa vuota
-        self.__targa = ""
+        self.__targa = "" 
         
         #imposto data e ora in cui inserisce la macchina
 
@@ -40,15 +44,19 @@ class PostoMezzo:
     def dataInizioParcheggio(self):
         return self.__dataInizioParcheggio
     
+    @property
+    def dataFineParcheggio(self):
+        return self.__dataFineParcheggio
+    
     def occupaPosto(self, targa):
         self.__targa = targa
         self.__dataInizioParcheggio = datetime.datetime.now()
         return
     
     def liberaPosto(self, targa):
-        # PROF: Questa cosa NON libera il posto. if targa == self.__targa: self.__targa = "" e prendi l'ora di fineParcheggio
-        self.__targa = targa
-        self.__dataFineParcheggio = datetime.datetime.now()
+        if targa == self.__targa:
+            self.__targa = "" 
+            self.__dataFineParcheggio = datetime.datetime.now()
         return
     
     def occupato(self):
@@ -58,8 +66,8 @@ class PostoMezzo:
              
 if __name__ == "__main__":
     # PROF: guarda la init ---> PostoMezzo NON prende parametri. Ma è giusto?? Almeno il tipo... ci vuole, no??
-    p1 = PostoMezzo("auto", " ", "None")
+    p1 = PostoMezzo("auto")
     print(p1)
     p1.targa = "AB 347 DF"
-    p1.data = datetime.datetime(2025, 1, 20, 20, 18, 00)
+    p1.dataInizioParcheggio = datetime.datetime(2025, 1, 20, 20, 18, 00)
     print(p1)

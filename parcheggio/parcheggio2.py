@@ -8,19 +8,17 @@ from auto import Auto
 from moto import Moto
 
 # PROF: Queste liste andrebbero importate dai rispettivi file...
-listaAuto = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES"]
-listaMoto = ["FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
 
 class Parcheggio:
     def __init__(self):
         self.__postiAuto=[]
         for n in range(1000):
-            posto = PostoMezzo()
+            posto = PostoMezzo("auto")
             self.__postiAuto.append(posto)
         
         self.__postiMoto = []
         for n in range(200):
-            posto = PostoMezzo()
+            posto = PostoMezzo("moto")
             self.__postiMoto.append(posto)
             
         self.__guadagno = 0
@@ -32,47 +30,47 @@ class Parcheggio:
     def __repr__(self):
         return str(self.__dict__)
     
-#     def parcheggia(self, veicolo:Veicolo):
-#         if veicolo.marca in listaAuto:    # PROF: if isinstance(veicolo, Auto):
-#             # allora è un auto...
-#             for posto in self.__postiAuto:
-#                 if not posto.occupato():
-#                     posto.occupaPosto(veicolo.targa)
-#                     return True
-#                 
-#                 # posti auto pieni
-#                 return False
-#         
-#         if veicolo.marca in listaMoto: #PROF: if isinstance(veicolo, Moto)
-#             # allora è un moto...
-#             for posto in self.__postiMoto:
-#                 if not posto.occupato():
-#                     posto.occupaPosto(veicolo.targa)
-#                     return True
-#             
-#             # posti moto pieni
-#             return False
-#     
-#     def libera(self, veicolo: Veicolo):
-#         if veicolo.marca in listaAuto:
-#             # allora è un auto...
-#             for posto in self.__postiAuto:
-#                 posto.liberaPosto(veicolo.targa)
-#                 numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
-#                 saldo = numeroOre * 1.5
-#                 self.__guadagno += saldo
-#                 return True
-#             
-#             return False
-#         
-#         if veicolo.marca in listaMoto:
-#             # allora è un auto...
-#             for posto in self.__postiMoto:
-#                 posto.liberaPosto(veicolo.targa)
-#                 numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
-#                 saldo = numeroOre * 1.2
-#                 self.__guadagno += saldo
-#                 return True
+    def parcheggia(self, veicolo:Veicolo):
+        if isinstance(veicolo, Auto):
+            # allora è un auto...
+            for posto in self.__postiAuto:
+                if not posto.occupato():
+                    posto.occupaPosto(veicolo.targa)
+                    return True
+                
+                # posti auto pieni
+                return False
+        
+        if isinstance(veicolo, Moto):
+            # allora è un moto...
+            for posto in self.__postiMoto:
+                if not posto.occupato():
+                    posto.occupaPosto(veicolo.targa)
+                    return True
+            
+            # posti moto pieni
+            return False
+    
+    def libera(self, veicolo: Veicolo):
+        if veicolo.marca in listaAuto:
+            # allora è un auto...
+            for posto in self.__postiAuto:
+                posto.liberaPosto(veicolo.targa)
+                numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
+                saldo = numeroOre * 1.5
+                self.__guadagno += saldo
+                return True
+            
+            return False
+        
+        if veicolo.marca in listaMoto:
+            # allora è un auto...
+            for posto in self.__postiMoto:
+                posto.liberaPosto(veicolo.targa)
+                numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
+                saldo = numeroOre * 1.2
+                self.__guadagno += saldo
+                return True
 #             
 #             return False
     # PROF: Questo cosa è?? Tu hai un'auto, una moto... un veicolo! Non una marca e una targa

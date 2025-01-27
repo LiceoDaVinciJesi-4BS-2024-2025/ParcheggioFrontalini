@@ -3,7 +3,9 @@
 #Classe Veicolo
 
 #creazione delle liste che mi servono per la classe veicolo -> Marca, Colore, Alimentazione
-listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
+#listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
+listaAuto = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES"]
+listaMoto = ["FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
 listaColore = ["nero", "bianco", "rosso", "blu", "verde", " fucsia", "arancione", "gialla", "viola", "grigio"]
 listaAlimentazione = ["diesel", "ibrido", "elettrico", "benzina"]
 
@@ -17,13 +19,21 @@ class Veicolo:
     # PROF: da come era descritto... qui andava solo la targa. Perché anche la marca? La marca non doveva essere nella lista sopra? Come mai hai commentato via il codice?
     def __init__(self, marca, targa):
         #impostazione del modello, colore, cilindrata, alimentazione a mia scelta
-#         if marca.upper() not in listaMarca:
-#             raise ValueError ("La marca non è presente")
-        self.__marca = marca
-        
+        if marca.upper() not in listaAuto and marca.upper() not in listaMoto:
+            raise ValueError ("La marca non è presente")
+        elif marca.upper() in listaAuto:
+            self.__marca = marca        
+            self.__tipo = "auto"
+        else:
+            self.__marca = marca
+            self.__tipo = "moto"
+                
         self.__modello = "Panda"
+        
         self.__colore = "fucsia"
+        
         self.__cilindrata = 1000
+        
         self.__alimentazione = "diesel"
         #creazione della lista targa 
         listaTarga = []
