@@ -66,7 +66,7 @@ class Auto(Veicolo):
 
 #I TEST
 if "__main__" == __name__:
-    a1 = Auto("FIAT", "QW 562 QB", 4, 2, 10000)
+    a1 = Auto("FIAT", "QW 562 PB", 4, 2, 10000)
     print(a1)
 #     a2 = Auto("QW 592 QB", 9, 2, 10000)
 #     print(a2)

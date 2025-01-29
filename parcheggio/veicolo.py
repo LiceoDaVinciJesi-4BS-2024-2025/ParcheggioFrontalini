@@ -3,7 +3,7 @@
 #Classe Veicolo
 
 #creazione delle liste che mi servono per la classe veicolo -> Marca, Colore, Alimentazione
-#listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
+listaMarca = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES", "FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
 listaAuto = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES"]
 listaMoto = ["FANTIC", "BETA", "E-SCOOTER", "HARLEY-DAVIDSON"]
 listaColore = ["nero", "bianco", "rosso", "blu", "verde", " fucsia", "arancione", "gialla", "viola", "grigio"]
@@ -19,6 +19,17 @@ class Veicolo:
     # PROF: da come era descritto... qui andava solo la targa. Perché anche la marca? La marca non doveva essere nella lista sopra? Come mai hai commentato via il codice?
     def __init__(self, marca, targa):
         #impostazione del modello, colore, cilindrata, alimentazione a mia scelta
+        #creazione della lista targa 
+        listaTarga = []
+        #per ogni elemento dellaa targa lo aggiungo alla lista
+        for x in targa:
+            listaTarga.append(x)
+        #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
+        for x in listaTarga:
+            if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
+                self.__targa = targa.upper()
+            else:
+                raise ValueError("Targa non valida")
         if marca.upper() not in listaAuto and marca.upper() not in listaMoto:
             raise ValueError ("La marca non è presente")
         elif marca.upper() in listaAuto:
@@ -35,17 +46,7 @@ class Veicolo:
         self.__cilindrata = 1000
         
         self.__alimentazione = "diesel"
-        #creazione della lista targa 
-        listaTarga = []
-        #per ogni elemento dellaa targa lo aggiungo alla lista
-        for x in targa:
-            listaTarga.append(x)
-        #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
-        for x in listaTarga:
-            if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
-                self.__targa = targa.upper()
-            else:
-                raise ValueError("Targa non valida")
+        
 #         
 #         veicolo = (self.__marca, self.__modello, self.__cilindrata)
 #         listaVeicoli.append(veicolo)
@@ -55,12 +56,16 @@ class Veicolo:
         return self.__class__.__name__ + str(self.__dict__)
     
     def __repr__(self):
-        return str(self.__dict__)
+        return self.__class__.__name__ + str(self.__dict__)
     
     #imposto le proprietà su marca, modello, colore, cilindrata, alimentazione, targa
     @property
     def marca(self):
         return self.__marca
+    
+    @property
+    def tipo(self):
+        return self.__tipo
     
     @property
     def modello(self):
@@ -84,7 +89,7 @@ class Veicolo:
     
     #imposto le setter
     
-    #è possibile camabiare la marca solamente se è all'interno della lista sennò ritorna errore
+    #è possibile cambiare la marca solamente se è all'interno della lista sennò ritorna errore
     @marca.setter
     def marca(self, value):
         if value.upper() not in listaMarca:
@@ -93,7 +98,12 @@ class Veicolo:
         self.__marca = value.upper()
         return 
     
-    
+    @tipo.setter
+    def tipo(self,value):
+        if self.__marca in listaAuto and value != "auto" or self.__marca in listaMoto and value != "moto":
+            raise ValueError("Il valore non è valido")
+        self.__tipo = value
+        
     #è possibile cambiare il modello
     @modello.setter
     def modello(self, value):
