@@ -15,7 +15,7 @@ tipo = ["auto", "moto"]
 class PostoMezzo:
     #funzione iniziale
     def __init__(self, tipoVeicolo):
-        
+        #controllo che il tipoVeicolo sia all'interno della lista
         if tipoVeicolo not in tipo:
             raise ValueError("il tipo di veicolo non è accettabile")
         self.__tipoVeicolo = tipoVeicolo
@@ -35,6 +35,10 @@ class PostoMezzo:
     def __repr__(self):
          return self.__class__.__name__ + str(self.__dict__)
     
+    #imposto la proprietà su tipoVeicolo, targa, dataInizioParcheggio e dataFineParcheggio
+    @property
+    def tipoVeicolo(self):
+        return self.__tipoVeicolo
     
     @property
     def targa(self):
@@ -60,44 +64,52 @@ class PostoMezzo:
                 self.__targa = value.upper()
             else:
                 raise ValueError("Targa non valida")
-            
+    
+    #imposto le setter su dataInizioParcheggio e dataFineParheggio
     @dataInizioParcheggio.setter
     def dataInizioParcheggio(self, value):
-        if value != datetime.datetime.now() or value != None:
+        if value != datetime.datetime.now():
             raise ValueError("Data non valida")
-        elif value == datetime.datetime.now():
-            self.__dataInizioParcheggio == datetime.datetime.now()
-        self.__dataInizioParcheggio == None 
-        
+        self.__dataInizioParcheggio == value   
         
     @dataFineParcheggio.setter
     def dataFineParcheggio(self, value):
-        if value != datetime.datetime.now() or value != None:
+        if value != datetime.datetime.now():
             raise ValueError("Data non valida")
-        elif value == datetime.datetime.now():
-            self.__dataFineParcheggio == datetime.datetime.now()
-        self.__dataFineParcheggio == None 
-        
+        self.__dataFineParcheggio == value   
+    
+    #funzione occupaPosto
     def occupaPosto(self, targa):
+        #la targa diventa quella inserita
         self.__targa = targa
+        #e la dataInzioParcheggio quella di quel momento
         self.__dataInizioParcheggio = datetime.datetime.now()
         return
     
+    #funzione liberaPosto
     def liberaPosto(self, targa):
+        #se la targa è uguale
         if targa == self.__targa:
-            self.__targa = "" 
+            #il self targa diventa vuto
+            self.__targa = ""
+            #e la dataFineParcheggio quella di quel momento
             self.__dataFineParcheggio = datetime.datetime.now()
         return
     
+    #funzione occupato
     def occupato(self):
+        #se la targa è vuota
         if self.__targa == "":
+            #tiortna falso
             return False
+        #ritorna vero
         return True
-             
+
+#I TEST
 if __name__ == "__main__":
     p1 = PostoMezzo("auto")
     print(p1)
     p1.targa = "AB 347 DF"
-    p1.dataInizioParcheggio = datetime.datetime.now()
     print(p1)
     p1.occupaPosto("AB 347 DF")
+    print(p1)

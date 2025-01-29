@@ -47,10 +47,6 @@ class Veicolo:
         
         self.__alimentazione = "diesel"
         
-#         
-#         veicolo = (self.__marca, self.__modello, self.__cilindrata)
-#         listaVeicoli.append(veicolo)
-        
     #funzione necessaria per visualizzare la classe
     def __str__(self):
         return self.__class__.__name__ + str(self.__dict__)
@@ -58,7 +54,7 @@ class Veicolo:
     def __repr__(self):
         return self.__class__.__name__ + str(self.__dict__)
     
-    #imposto le proprietà su marca, modello, colore, cilindrata, alimentazione, targa
+    #imposto le proprietà su marca, tipo, modello, colore, cilindrata, alimentazione, targa
     @property
     def marca(self):
         return self.__marca
@@ -98,6 +94,7 @@ class Veicolo:
         self.__marca = value.upper()
         return 
     
+    #cambiamento del tipo
     @tipo.setter
     def tipo(self,value):
         if self.__marca in listaAuto and value != "auto" or self.__marca in listaMoto and value != "moto":

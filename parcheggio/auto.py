@@ -7,7 +7,7 @@ from veicolo import Veicolo
 
 #Classe Auto ereditata da Veicolo
 class Auto(Veicolo):
-    #funzione iniziale con attributi quali targa, numero massimo di passeggeri, numero di passeggeri trasportati e il massimo della capacità di trasporto
+    #funzione iniziale con attributi quali marca, targa, numero massimo di passeggeri, numero di passeggeri trasportati e il massimo della capacità di trasporto
     def __init__(self, marca:str, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
         super().__init__(marca, targa)
         
@@ -68,5 +68,5 @@ class Auto(Veicolo):
 if "__main__" == __name__:
     a1 = Auto("FIAT", "QW 562 PB", 4, 2, 10000)
     print(a1)
-#     a2 = Auto("QW 592 QB", 9, 2, 10000)
+#     a2 = Auto("FERRARI", "QW 592 QB", 9, 2, 10000)
 #     print(a2)

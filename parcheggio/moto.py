@@ -7,7 +7,7 @@ from veicolo import Veicolo
 
 #Classe Moto ereditata da Veicolo
 class Moto(Veicolo):
-    #funzione iniziale con attributi quali targa, numero massimo di passeggeri, numero di passeggeri trasportati e il massimo della capacità di trasporto
+    #funzione iniziale con attributi quali marca, targa, numero massimo di passeggeri, numero di passeggeri trasportati e il massimo della capacità di trasporto
     def __init__(self, marca : str, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
         super().__init__(marca, targa)
         
@@ -66,7 +66,6 @@ class Moto(Veicolo):
 
 #I TEST
 if "__main__" == __name__:
-    # PROF: Anche qui, MANCA LA MARCA!!! Ma perché hai "rifatto" la classe veicolo in questo modo??
     m1 = Moto("HARLEY-DAVIDSON", "XW 491 JR", 2, 2, 400)
     print(m1)
     

@@ -2,120 +2,146 @@
 #Classe 4BS
 #Esercizio
 
-#1000 auto e 200 moto
-#importo la classe PostoMezzo dal file postoMezzo
+#importo tutte le classi create dai rispettivi file
 from postoMezzo import PostoMezzo
 from veicolo import Veicolo
-#importo datetime e csv
+from auto import Auto
+from moto import Moto
+#importo datetime, pathlib e csv
 import datetime
+from pathlib import Path
 import csv
-#creo due liste una per la prenotazione del posto e per il csv
-listaPrenotazionePosto = []
-listaCSV = []
 
-# PROF: Questo non dovevi prenderlo dalla classe veicolo??
-listaAuto = ["FIAT", "FERRARI", "AUDI", "BMW", "MASERATI", "VOLKSWAGEN", "ALFA ROMEO", "MERCEDES"]
-#creazione della classe Parcheggio 
+#classe Parcheggio
 class Parcheggio:
-    #funzione iniziale con self e nome parcheggio
-    def __init__(self, nomeParcheggio):
-        #imposto postiLiberiAuto, postiLiberiMoto e guadagnoParcheggio
-        self.__nomeParcheggio = nomeParcheggio
-        #lista di posti mezzo 
-        self.__postiLiberiAuto = 1000
-        self.__postiLiberiMoto = 200
-        self.__guadagnoParcheggio = 0
-        # PROF: Ok il numero dei posti... ma i 1000 PostoMezzo per auto e i 200 PostoMezzo per moto... dove sono??
+    #funzione inziale
+    def __init__(self):
+        #imposto la creazione di liste per i posti auto(1000) e moto(200)
+        self.__postiAuto=[]
+        for n in range(1000):
+            posto = PostoMezzo("auto")
+            self.__postiAuto.append(posto)
+            
+        self.__postiMoto = []
+        for n in range(200):
+            posto = PostoMezzo("moto")
+            self.__postiMoto.append(posto)
         
+        #imposto il guadagno del parcheggio uguale a 0
+        self.__guadagno = 0
+            
     #funzione necessaria per visualizzare la classe
     def __str__(self):
         return self.__class__.__name__ + str(self.__dict__)
     
     def __repr__(self):
-        return str(self.__dict__)
+        return str(self.__dict__) 
     
-    #imposto le property sul nome, postiLiberiAuto, postiLiberiMoto e guadagnoParcheggio per non farlo cambiare da parte dell'utente
-    @property
-    def nomeParcheggio(self):
-        return nomeParcheggio
-    
-    @property
-    def postiLiberiAuto(self):
-        return postiLiberiAuto
-    
-    @property
-    def postiLiberiMoto(self):
-        return postiLiberiMoto
-    
-    #funzione di PrenotazionePosto 
-    # PROF: tutta questa cosa... non ha senso
-    def occupaPosto(self, mezzo: Veicolo):
-        #se la tipologia del mezzo è auto
-        if mezzo.marca in listaAuto:
-            #.. e ci sono ancora posti liberi Auto
-            if self.__postiLiberiAuto > 0:
-                mezzo.occupaPosto(mezzo.targa)
-                #tolgo un posto dai postiLiberi
-                self.__postiLiberiAuto -= 1
-                #calcolo il numeroOreSosta -> data impostata - quella di ora -> calcolo i seconfi e divido per 3600 per trovare le ore
-                numeroOreSosta = (mezzo.dataFineParcheggio - mezzo.dataInizioParcheggio).total_seconds() / 3600 
-                #calcolo il saldo moltiplicando per 1.5
-                saldo = numeroOreSosta * 1.5
-                #aggiugno al guadagno del parcheggio il saldo
-                self.__guadagnoParcheggio += saldo
-                #aggiungo alla lista di prenotazione le caratteristiche del mezzo, numero di ore e saldo 
-                listaPrenotazionePosto.append((mezzo.tipologia, mezzo.targa, numeroOreSosta, saldo))
+    #funzione parcheggio prende come attributo un veicolo
+    def parcheggia(self, veicolo: Veicolo):
+        #se il tipo è un auto
+        if veicolo.tipo == "auto":
+            #controllo che i posti della lista non siano tutti occupati e ne occupo uno
+            for posto in self.__postiAuto:
+                if not posto.occupato():
+                    posto.occupaPosto(veicolo.targa)
+                    #ritorna vero
+                    return True
                 
-                listaCSV.append({"veicolo": (mezzo.tipologia, mezzo.targa, numeroOreSosta, saldo), "totaleGuadagno" : self.__guadagnoParcheggio})
-                return listaPrenotazionePosto
-            else:
-                return ("I posti sono terminati")
-        elif mezzo.tipologia == "moto":
-            if self.__postiLiberiMoto > 0:
-                numeroOreSosta = (mezzo.data - datetime.datetime.now()).total_seconds() / 3600 
-                saldo = numeroOreSosta * 1.2
-                self.__postiLiberiMoto -= 1
-                self.__guadagnoParcheggio += saldo
-                listaPrenotazionePosto.append((mezzo.tipologia, mezzo.targa, numeroOreSosta, saldo))
-                listaCSV.append({"veicolo": (mezzo.tipologia, mezzo.targa, numeroOreSosta, saldo), "totaleGuadagno" : self.__guadagnoParcheggio})
-                return listaPrenotazionePosto
-            else:
-                return ("I posti sono terminati")
-        else:
-            raise ValueError("Mezzo non valido")
+            #posti auto pieni
+            return False
         
-    print(listaCSV)
-#     #CREO IL DOCUMENTO PARK.DATA DOVE AGGGIUNGERE I DATI DELLA BIBLIOTECA CHE SI TROVANO NELLA LISTA
-#     # importo Path
-    from pathlib import Path
-#     import csv
-    #si crea un nuovo file
-    #crea la cartella ovunque essa sia
-    nuovoFile = Path.cwd() / "park.data"
-    #imposto i campi           
-    campi = ["veicolo","totaleGuadagno"]
-    #apro il file biblioteca che ho creato
-    fileParcheggio = nuovoFile.open("w")
-    #imposto lo scrittore       
-    scrittore = csv.DictWriter(fileParcheggio, campi)
-    #per ogni elemento della listaCSV    
-    for riga in listaCSV:
-        #lo scrivo nel file
-        scrittore.writerow(riga)
-    #chiudo il file            
-    fileParcheggio.close()
+        #UGUALE PER LE MOTO
+        if veicolo.tipo == "moto":
+            for posto in self.__postiMoto:
+                if not posto.occupato():
+                    posto.occupaPosto(veicolo.targa)
+                    return True
+            
+            return False
+    
+    #funzione libera sempre con attributo veicolo
+    def libera(self, veicolo: Veicolo):
+        #se il tipo è un auto
+        if veicolo.tipo == "auto":
+            #trovo il veicolo all'interno della lista
+            for posto in self.__postiAuto:
+                #uso la funzione di postoMezzo per liberare il posto
+                posto.liberaPosto(veicolo.targa)
+                #calcolo il numero di ore
+                numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
+                #calcolo il aldo moltiplicandolo *1.5 e lo aggiungo al guadagno del parcheggio
+                saldo = numeroOre * 1.5
+                self.__guadagno += saldo
+                #ritorna vero
+                return True
+            #ritorna falso
+            return False
         
-#I TEST        
+        #UGUALE PER LE MOTO
+        if veicolo.tipo == "moto":
+            for posto in self.__postiMoto:
+                posto.liberaPosto(veicolo.targa)
+                numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
+                saldo = numeroOre * 1.2
+                self.__guadagno += saldo
+                return True
+             
+            return False
+            
+    #funzione di scrittura
+    def scrittura(self):
+        #creo la lista per i dati da Inserire
+        datiDaInserire = []
+        #insierisco nella lista il tipoveicolo, targa, dataInzioParcheggio e dataFineParcheggio sia della lista dei postiAuto sia della lista dei postiMoto
+        for posto in self.__postiAuto:
+            datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio":posto.dataInizioParcheggio, "dataFineParcheggio":posto.dataFineParcheggio})
+        
+        for posto in self.__postiMoto:
+            datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio":posto.dataInizioParcheggio, "dataFineParcheggio":posto.dataFineParcheggio})
+        
+        #creo il nuovo file dive su trova tutta la cartella e lo apro
+        nuovoFile = Path.cwd() / "park.data"
+        fileParcheggio = nuovoFile.open("w")
+        
+        #come capi prendo quelli che si trovano nella lista
+        campi = ["tipoVeicolo", "targa", "dataInizioParcheggio", "dataFineParcheggio"]
+        
+        #attivo lo scrittore
+        scrittore = csv.DictWriter(fileParcheggio, campi)
+        scrittore.writeheader()
+    
+        #per ogni riga nei datiDaInserire
+        for riga in datiDaInserire:
+            #lo faccio srivere sul file
+            scrittore.writerow(riga)
+        
+        #scrivo sul file anche il totale del guadagno
+        fileParcheggio.write(str(self.__guadagno))
+        
+        #chiudo il file
+        fileParcheggio.close()
+        return
+            
+#FACCIO I TEST                
 if __name__ == "__main__":
-    p = Parcheggio("Il mio Fantastico Parcheggio")
+    p = Parcheggio()
     print(p)
-    prenotazione1 = p.occupaPosto(Veicolo("AS 345 WS"))
-#     prenotazione2 = p.prenotazionePosto(PostoMezzo("moto", "PK 590 DQ", datetime.datetime(2025, 1, 24, 14, 18, 00)))
-#     #prenotazione3 = p.prenotazionePosto(PostoMezzo("camion", "GH 401 QP", datetime.datetime(2025, 1, 22, 20, 18, 00)))
-#     prenotazione4 = p.prenotazionePosto(PostoMezzo("auto", "SR 761 KL", datetime.datetime(2025, 1, 25, 17, 18, 00)))
-    #prenotazione5 = p.prenotazionePosto(PostoMezzo("moto", "NB 321 BH", datetime.datetime(2025, 1, 19, 20, 18, 00)))
-    #print(prenotazione3)
-    print(prenotazione1)
-    #print(prenotazione5)
+    auto1 = p.parcheggia(Veicolo("FERRARI", "AS 234 DE"))
+    print(auto1)
+    moto1 = p.parcheggia(Veicolo("FANTIC", "TR 892 OI"))
+    print(moto1)
     print(p)
-        
+    auto2 = p.parcheggia(Veicolo("FIAT", "QW 457 DP"))
+    print(auto2)
+    print(p)
+    print(p.scrittura())
+    
+    #dopo un po'
+#     auto1Libera = p.libera(Veicolo("FERRARI", "AS 234 DE"))
+#     print(auto1Libera)
+#     moto1Libera = p.libera(Veicolo("FANTIC", "TR 892 OI"))
+#     print(moto1Libera)
+#     print(p)
+#     print(p.scrittura())
+    
