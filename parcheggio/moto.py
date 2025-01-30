@@ -8,8 +8,8 @@ from veicolo import Veicolo
 #Classe Moto ereditata da Veicolo
 class Moto(Veicolo):
     #funzione iniziale con attributi quali marca, targa, numero massimo di passeggeri, numero di passeggeri trasportati e il massimo della capacità di trasporto
-    def __init__(self, marca : str, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
-        super().__init__(marca, targa)
+    def __init__(self, targa : str, numeroMaxPasseggeri: int, numeroPasseggeriTrasportati : int, maxCapacitàTrasporto : int):
+        super().__init__(targa)
         
         #controllo che il numero massimo di passeggeri sia compreso tra 0 e 3 esclusi
         #in caso contrario ritorna errore
@@ -66,7 +66,7 @@ class Moto(Veicolo):
 
 #I TEST
 if "__main__" == __name__:
-    m1 = Moto("HARLEY-DAVIDSON", "XW 491 JR", 2, 2, 400)
+    m1 = Moto("XW 491 JR", 2, 2, 400)
     print(m1)
     m1.numeroPasseggeriTrasportati = 1
     m1.maxCapacitàTrasporto = 100

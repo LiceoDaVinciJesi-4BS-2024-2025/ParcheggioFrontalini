@@ -60,7 +60,7 @@ class Parcheggio:
     #funzione parcheggio prende come attributo un veicolo
     def parcheggia(self, veicolo: Veicolo):
         #se il tipo è un auto
-        if veicolo.tipo == "auto":
+        if isinstance(veicolo, Auto):
             #controllo che i posti della lista non siano tutti occupati e ne occupo uno
             for posto in self.__postiAuto:
                 if not posto.occupato():
@@ -72,7 +72,7 @@ class Parcheggio:
             return False
         
         #UGUALE PER LE MOTO
-        if veicolo.tipo == "moto":
+        if isinstance(veicolo, Moto):
             for posto in self.__postiMoto:
                 if not posto.occupato():
                     posto.occupaPosto(veicolo.targa)
@@ -83,7 +83,7 @@ class Parcheggio:
     #funzione libera sempre con attributo veicolo
     def libera(self, veicolo: Veicolo):
         #se il tipo è un auto
-        if veicolo.tipo == "auto":
+        if isinstance(veicolo, Auto):
             #trovo il veicolo all'interno della lista
             for posto in self.__postiAuto:
                 #uso la funzione di postoMezzo per liberare il posto
@@ -94,32 +94,39 @@ class Parcheggio:
                 saldo = numeroOre * 1.5
                 self.__guadagno += saldo
                 #ritorna vero
-                return True
+                return saldo
             #ritorna falso
-            return False
+            return "Non è possibile liberare il posto perchè macchina non presente"
         
         #UGUALE PER LE MOTO
-        if veicolo.tipo == "moto":
+        if isinstance(veicolo, Moto):
             for posto in self.__postiMoto:
                 posto.liberaPosto(veicolo.targa)
                 numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
                 saldo = numeroOre * 1.2
                 self.__guadagno += saldo
-                return True
-             
-            return False
-            
+                #ritorna vero
+                return saldo
+            #ritorna falso
+            return "Non è possibile liberare il posto perchè macchina non presente"
+        
     #funzione di scrittura
     def scrittura(self):
         #creo la lista per i dati da Inserire
         datiDaInserire = []
         #insierisco nella lista il tipoveicolo, targa, dataInzioParcheggio e dataFineParcheggio sia della lista dei postiAuto sia della lista dei postiMoto
         for posto in self.__postiAuto:
-            datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio":posto.dataInizioParcheggio, "dataFineParcheggio":posto.dataFineParcheggio})
+            if type(posto.dataInizioParcheggio) == datetime.datetime:
+                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":posto.dataFineParcheggio.strftime("%Y : %m : %d : %H : %M : %S")})
+            else:
+                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
         
         for posto in self.__postiMoto:
-            datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio":posto.dataInizioParcheggio, "dataFineParcheggio":posto.dataFineParcheggio})
-        
+            if type(posto.dataInizioParcheggio) == datetime.datetime:
+                datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":posto.dataFineParcheggio.strftime("%Y : %m : %d : %H : %M : %S")})
+            else:
+                datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
+                
         #creo il nuovo file dive su trova tutta la cartella e lo apro
         nuovoFile = Path.cwd() / "park.data"
         fileParcheggio = nuovoFile.open("w")
@@ -129,7 +136,7 @@ class Parcheggio:
         
         #attivo lo scrittore
         scrittore = csv.DictWriter(fileParcheggio, campi)
-        scrittore.writeheader()
+        scrittore.writeheader
     
         #per ogni riga nei datiDaInserire
         for riga in datiDaInserire:
@@ -142,17 +149,33 @@ class Parcheggio:
         #chiudo il file
         fileParcheggio.close()
         return
+    
+    def lettura(self):
+        # la lista su cui caricheremo i dati
+        datiAuto = []
+        datiMoto = []
+
+        file = open("park.data", "r")
+        lettore = csv.DictReader(file)
+
+        for riga in lettore:
+            if tipoVeicolo == "auto":
+                datiAuto.append(riga)
+            else:
+                datiMoto.append(riga)
+
+        file.close()
             
 #FACCIO I TEST                
 if __name__ == "__main__":
     p = Parcheggio("ParcheggioFrontalini")
     print(p)
-    auto1 = p.parcheggia(Veicolo("FERRARI", "AS 234 DE"))
+    auto1 = p.parcheggia(Auto("AS 134 DE", 5, 2, 600))
     print(auto1)
-    moto1 = p.parcheggia(Veicolo("FANTIC", "TR 892 OI"))
+    moto1 = p.parcheggia(Moto("TR 892 OI", 2, 1, 100))
     print(moto1)
     print(p)
-    auto2 = p.parcheggia(Veicolo("FIAT", "QW 457 DP"))
+    auto2 = p.parcheggia(Auto("QW 457 DP", 7, 4, 1000))
     print(auto2)
     print(p)
     print(p.scrittura())

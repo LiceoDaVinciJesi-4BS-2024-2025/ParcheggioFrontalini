@@ -52,19 +52,19 @@ class PostoMezzo:
     def dataFineParcheggio(self):
         return self.__dataFineParcheggio
     
-    @targa.setter
-    def targa(self, value):
-        listaTarga = []
-        #per ogni elemento dellaa targa lo aggiungo alla lista
-        for x in value:
-            listaTarga.append(x)
-        #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
-        for x in listaTarga:
-            if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
-                self.__targa = value.upper()
-            else:
-                raise ValueError("Targa non valida")
-    
+#     @targa.setter
+#     def targa(self, value):
+#         listaTarga = []
+#         #per ogni elemento dellaa targa lo aggiungo alla lista
+#         for x in value:
+#             listaTarga.append(x)
+#         #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
+#         for x in listaTarga:
+#             if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
+#                 self.__targa = value.upper()
+#             else:
+#                 raise ValueError("Targa non valida")
+#     
     #imposto le setter su dataInizioParcheggio e dataFineParheggio
     @dataInizioParcheggio.setter
     def dataInizioParcheggio(self, value):

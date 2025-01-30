@@ -16,7 +16,7 @@ numeri = "1234567890"
 #Classe Veicolo
 class Veicolo:
     #funzione iniziale con parametri self e targa
-    def __init__(self, marca, targa):
+    def __init__(self, targa):
         #impostazione del modello, colore, cilindrata, alimentazione a mia scelta
         #creazione della lista targa 
         listaTarga = []
@@ -29,14 +29,8 @@ class Veicolo:
                 self.__targa = targa.upper()
             else:
                 raise ValueError("Targa non valida")
-        if marca.upper() not in listaAuto and marca.upper() not in listaMoto:
-            raise ValueError ("La marca non è presente")
-        elif marca.upper() in listaAuto:
-            self.__marca = marca        
-            self.__tipo = "auto"
-        else:
-            self.__marca = marca
-            self.__tipo = "moto"
+        
+        self.__marca = "FIAT"
                 
         self.__modello = "Panda"
         
