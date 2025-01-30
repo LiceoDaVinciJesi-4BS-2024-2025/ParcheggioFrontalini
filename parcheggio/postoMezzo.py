@@ -113,3 +113,5 @@ if __name__ == "__main__":
     print(p1)
     p1.occupaPosto("AB 347 DF")
     print(p1)
+    p1.liberaPosto("AB 347 DF")
+    print(p1)

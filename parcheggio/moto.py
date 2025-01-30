@@ -68,6 +68,8 @@ class Moto(Veicolo):
 if "__main__" == __name__:
     m1 = Moto("HARLEY-DAVIDSON", "XW 491 JR", 2, 2, 400)
     print(m1)
-    
+    m1.numeroPasseggeriTrasportati(1)
+    m1.maxCapacitàTrasporto(100)
+    print(m1)
 #     m2 = Moto("XP 491 JR", 4, 2, 400)
 #     print(m2)
