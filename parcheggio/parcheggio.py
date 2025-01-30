@@ -15,7 +15,8 @@ import csv
 #classe Parcheggio
 class Parcheggio:
     #funzione inziale
-    def __init__(self):
+    def __init__(self, nomeParcheggio):
+        self.__nomeParcheggio = nomeParcheggio
         #imposto la creazione di liste per i posti auto(1000) e moto(200)
         self.__postiAuto=[]
         for n in range(1000):
@@ -36,6 +37,23 @@ class Parcheggio:
     
     def __repr__(self):
         return str(self.__dict__) 
+    
+    #imposto le proprietà
+    @property
+    def nomeParcheggio(self):
+        return self.__nomeParcheggio
+    
+    @property
+    def postiAuto(self):
+        return self.__postiAuto
+    
+    @property
+    def postiMoto(self):
+        return self.__postiMoto
+    
+    @property
+    def guardagno(self):
+        return self.__guadagno
     
     #funzione parcheggio prende come attributo un veicolo
     def parcheggia(self, veicolo: Veicolo):
@@ -125,7 +143,7 @@ class Parcheggio:
             
 #FACCIO I TEST                
 if __name__ == "__main__":
-    p = Parcheggio()
+    p = Parcheggio("ParcheggioFrontalini")
     print(p)
     auto1 = p.parcheggia(Veicolo("FERRARI", "AS 234 DE"))
     print(auto1)
