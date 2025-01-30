@@ -53,7 +53,7 @@ class Moto(Veicolo):
     #è possibile cambiare  il numero di passegeri trasportati se è minore del numero massimo di passeggeri sennò ritorna errore
     @numeroPasseggeriTrasportati.setter
     def numeroPasseggeriTrasportati(self, value):
-        if value > numeroMaxPasseggeri:
+        if value > self.__numeroMaxPasseggeri:
             raise ValueError ("Non è possibile")
         self.__numeroPasseggeriTrasportati = value
         return
@@ -68,8 +68,8 @@ class Moto(Veicolo):
 if "__main__" == __name__:
     m1 = Moto("HARLEY-DAVIDSON", "XW 491 JR", 2, 2, 400)
     print(m1)
-    m1.numeroPasseggeriTrasportati(1)
-    m1.maxCapacitàTrasporto(100)
+    m1.numeroPasseggeriTrasportati = 1
+    m1.maxCapacitàTrasporto = 100
     print(m1)
 #     m2 = Moto("XP 491 JR", 4, 2, 400)
 #     print(m2)
