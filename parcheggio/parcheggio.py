@@ -30,6 +30,8 @@ class Parcheggio:
         
         #imposto il guadagno del parcheggio uguale a 0
         self.__guadagno = 0
+        
+        #if Path("park.data").exists():
             
     #funzione necessaria per visualizzare la classe
     def __str__(self):
