@@ -54,7 +54,7 @@ class Parcheggio:
         return self.__postiMoto
     
     @property
-    def guardagno(self):
+    def guadagno(self):
         return self.__guadagno
     
     #funzione parcheggio prende come attributo un veicolo
@@ -116,16 +116,20 @@ class Parcheggio:
         datiDaInserire = []
         #insierisco nella lista il tipoveicolo, targa, dataInzioParcheggio e dataFineParcheggio sia della lista dei postiAuto sia della lista dei postiMoto
         for posto in self.__postiAuto:
-            if type(posto.dataInizioParcheggio) == datetime.datetime:
-                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":posto.dataFineParcheggio.strftime("%Y : %m : %d : %H : %M : %S")})
-            else:
+            if posto.targa == " ":
                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
-        
-        for posto in self.__postiMoto:
-            if type(posto.dataInizioParcheggio) == datetime.datetime:
-                datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":posto.dataFineParcheggio.strftime("%Y : %m : %d : %H : %M : %S")})
+            elif posto.targa != " " and posto.dataInizioParcheggio != " " :
+                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.isoformat(), "dataFineParcheggio":"data non presente"})
             else:
-                datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
+                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "pizza", "dataFineParcheggio":"pizza"})
+        
+#         for posto in self.__postiMoto:
+#             if posto.targa == " ":
+#                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
+#             elif posto.targa != " " and posto.dataInizioParcheggio == None :
+#                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":"data non presente"})
+#             else:
+#                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":posto.dataFineParcheggio.strftime("%Y : %m : %d : %H : %M : %S")})
                 
         #creo il nuovo file dive su trova tutta la cartella e lo apro
         nuovoFile = Path.cwd() / "park.data"
@@ -159,7 +163,7 @@ class Parcheggio:
         lettore = csv.DictReader(file)
 
         for riga in lettore:
-            if tipoVeicolo == "auto":
+            if riga["tipoVeicolo"] == "auto":
                 datiAuto.append(riga)
             else:
                 datiMoto.append(riga)
@@ -181,9 +185,9 @@ if __name__ == "__main__":
     print(p.scrittura())
     
     #dopo un po'
-#     auto1Libera = p.libera(Veicolo("FERRARI", "AS 234 DE"))
+#     auto1Libera = p.libera(Auto("FERRARI", "AS 234 DE"))
 #     print(auto1Libera)
-#     moto1Libera = p.libera(Veicolo("FANTIC", "TR 892 OI"))
+#     moto1Libera = p.libera(Moto("FANTIC", "TR 892 OI"))
 #     print(moto1Libera)
 #     print(p)
 #     print(p.scrittura())
