@@ -31,7 +31,9 @@ class Parcheggio:
         #imposto il guadagno del parcheggio uguale a 0
         self.__guadagno = 0
         
-        #if Path("park.data").exists():
+        if Path("park.data").exists():
+            self.lettura()
+            
             
     #funzione necessaria per visualizzare la classe
     def __str__(self):
@@ -89,12 +91,13 @@ class Parcheggio:
                 #uso la funzione di postoMezzo per liberare il posto
                 posto.liberaPosto(veicolo.targa)
                 #calcolo il numero di ore
-                numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
-                #calcolo il aldo moltiplicandolo *1.5 e lo aggiungo al guadagno del parcheggio
-                saldo = numeroOre * 1.5
-                self.__guadagno += saldo
+                #numeroOre = (posto.dataFineParcheggio - posto.dataInizioParcheggio).total_seconds() / 3600
+                #calcolo il saldo moltiplicandolo *1.5 e lo aggiungo al guadagno del parcheggio
+                #saldo = numeroOre * 1.5
+                #self.__guadagno += saldo
                 #ritorna vero
-                return saldo
+                #return saldo
+                return posto.dataFineParcheggio
             #ritorna falso
             return "Non è possibile liberare il posto perchè macchina non presente"
         
@@ -118,18 +121,16 @@ class Parcheggio:
         for posto in self.__postiAuto:
             if posto.targa == " ":
                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
-            elif posto.targa != " " and posto.dataInizioParcheggio != " " :
-                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.isoformat(), "dataFineParcheggio":"data non presente"})
             else:
-                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "pizza", "dataFineParcheggio":"pizza"})
+                datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio, "dataFineParcheggio":posto.dataFineParcheggio})
         
-#         for posto in self.__postiMoto:
-#             if posto.targa == " ":
-#                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
-#             elif posto.targa != " " and posto.dataInizioParcheggio == None :
-#                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":"data non presente"})
-#             else:
-#                 datiDaInserire.append({"tipoVeicolo": "auto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio.strftime("%Y : %m : %d : %H : %M : %S"), "dataFineParcheggio":posto.dataFineParcheggio.strftime("%Y : %m : %d : %H : %M : %S")})
+        for posto in self.__postiMoto:
+            if posto.targa == " ":
+                datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio": "data non presente", "dataFineParcheggio":"data non presente"})
+            else:
+                datiDaInserire.append({"tipoVeicolo": "moto", "targa":posto.targa,"dataInizioParcheggio": posto.dataInizioParcheggio, "dataFineParcheggio":posto.dataFineParcheggio})
+
+
                 
         #creo il nuovo file dive su trova tutta la cartella e lo apro
         nuovoFile = Path.cwd() / "park.data"
@@ -140,7 +141,7 @@ class Parcheggio:
         
         #attivo lo scrittore
         scrittore = csv.DictWriter(fileParcheggio, campi)
-        scrittore.writeheader
+        scrittore.writeheader()
     
         #per ogni riga nei datiDaInserire
         for riga in datiDaInserire:
@@ -169,6 +170,7 @@ class Parcheggio:
                 datiMoto.append(riga)
 
         file.close()
+        return 
             
 #FACCIO I TEST                
 if __name__ == "__main__":
@@ -183,12 +185,13 @@ if __name__ == "__main__":
     print(auto2)
     print(p)
     print(p.scrittura())
+    print(p.lettura())
     
     #dopo un po'
-#     auto1Libera = p.libera(Auto("FERRARI", "AS 234 DE"))
-#     print(auto1Libera)
-#     moto1Libera = p.libera(Moto("FANTIC", "TR 892 OI"))
-#     print(moto1Libera)
-#     print(p)
-#     print(p.scrittura())
+    #auto1Libera = p.libera(Auto("AS 234 DE", 5, 3, 1000))
+    #print(auto1Libera)
+    moto1Libera = p.libera(Moto("TR 892 OI", 2, 1, 500))
+    print(moto1Libera)
+    print(p)
+    print(p.scrittura())
     
