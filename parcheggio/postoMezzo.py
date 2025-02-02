@@ -14,19 +14,19 @@ tipo = ["auto", "moto"]
 #classe PostoMezzo
 class PostoMezzo:
     #funzione iniziale
-    def __init__(self, tipoVeicolo):
+    def __init__(self, tipoVeicolo, targa : str = "", dataInizioParcheggio : datetime.datetime = None, dataFineParcheggio: datetime.datetime = None):
         #controllo che il tipoVeicolo sia all'interno della lista
         if tipoVeicolo not in tipo:
             raise ValueError("il tipo di veicolo non è accettabile")
         self.__tipoVeicolo = tipoVeicolo
             
         #imposto targa vuota
-        self.__targa = "" 
+        self.__targa = targa
         
         #imposto data e ora in cui inserisce la macchina
 
-        self.__dataInizioParcheggio = None
-        self.__dataFineParcheggio = None
+        self.__dataInizioParcheggio = dataInizioParcheggio
+        self.__dataFineParcheggio = dataFineParcheggio
     
     #funzione necessaria per visualizzare la classe
     def __str__(self):
@@ -52,30 +52,26 @@ class PostoMezzo:
     def dataFineParcheggio(self):
         return self.__dataFineParcheggio
     
-#     @targa.setter
-#     def targa(self, value):
-#         listaTarga = []
-#         #per ogni elemento dellaa targa lo aggiungo alla lista
-#         for x in value:
-#             listaTarga.append(x)
-#         #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
-#         for x in listaTarga:
-#             if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
-#                 self.__targa = value.upper()
-#             else:
-#                 raise ValueError("Targa non valida")
-#     
+    @targa.setter
+    def targa(self, value):
+        listaTarga = []
+        #per ogni elemento dellaa targa lo aggiungo alla lista
+        for x in value:
+            listaTarga.append(x)
+        #per ogni elemento della lista della targa controllo che essa si del tipo "AB 123 CD" tramite le posizioni della lista
+        for x in listaTarga:
+            if listaTarga[0] in alfabeto and listaTarga[1] in alfabeto and listaTarga[7] in alfabeto and listaTarga[8] in alfabeto and listaTarga[2] == " " and listaTarga[6] == " " and listaTarga[3] in numeri and listaTarga[4] in numeri and listaTarga[5] in numeri:
+                self.__targa = value.upper()
+            else:
+                raise ValueError("Targa non valida")
+    
     #imposto le setter su dataInizioParcheggio e dataFineParheggio
     @dataInizioParcheggio.setter
     def dataInizioParcheggio(self, value):
-        if value != datetime.datetime.now():
-            raise ValueError("Data non valida")
         self.__dataInizioParcheggio == value   
         
     @dataFineParcheggio.setter
     def dataFineParcheggio(self, value):
-        if value != datetime.datetime.now():
-            raise ValueError("Data non valida")
         self.__dataFineParcheggio == value   
     
     #funzione occupaPosto
