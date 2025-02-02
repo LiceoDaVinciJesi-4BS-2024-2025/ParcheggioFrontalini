@@ -31,8 +31,8 @@ class Parcheggio:
         #imposto il guadagno del parcheggio uguale a 0
         self.__guadagno = 0
         
-#         if Path("park.data").exists():
-#             self.lettura()
+        #if Path("park.data").exists():
+            #self.lettura()
             
             
     #funzione necessaria per visualizzare la classe
@@ -158,33 +158,33 @@ class Parcheggio:
         fileParcheggio.close()
         return
     
-    def lettura(self):
-        # la lista su cui caricheremo i dati
-        datiAuto = []
-        datiMoto = []
-
-        file = open("park.data", "r")
-        lettore = csv.DictReader(file)
-
-        for riga in lettore:
-            if riga["tipoVeicolo"] == "auto" or riga["tipoVeicolo"] == "moto":
-                if riga["dataInizioParcheggio"] == "data non presente" or riga["dataFineParcheggio"] == "data non presente":
-                    parcheggioAuto = PostoMezzo(riga["tipoVeicolo"], riga["targa"], None, None)                    
-                elif riga["dataInizioParcheggio"] != None:
-                    parcheggioAuto = PostoMezzo(riga["tipoVeicolo"], riga["targa"], datetime.datetime.strptime(riga["dataInizioParcheggio"], "%Y-%m-%d %H:%M:%S")) 
-                    datiAuto.append(parcheggioAuto)
-                else:
-                    parcheggioAuto = PostoMezzo(riga["tipoVeicolo"], riga["targa"], datetime.datetime.strptime(riga["dataInizioParcheggio"], "%Y-%m-%d %H:%M:%S"), datetime.datetime.strptime(riga["dataFineParcheggio"], "%Y-%m-%d %H:%M:%S"))
-                    datiAuto.append(parcheggioAuto)
-                    
-            else:
-                self.__guadagno = float(riga["tipoVeicolo"])
-        
-         #ricreo le liste del parcheggio
-        self.__postiAuto= datiAuto
-        self.__postiMoto= datiMoto
-        file.close()
-        return 
+#     def lettura(self):
+#         # la lista su cui caricheremo i dati
+#         datiAuto = []
+#         datiMoto = []
+# 
+#         file = open("park.data", "r")
+#         lettore = csv.DictReader(file)
+# 
+#         for riga in lettore:
+#             if riga["tipoVeicolo"] == "auto" or riga["tipoVeicolo"] == "moto":
+#                 if riga["dataInizioParcheggio"] == "data non presente" or riga["dataFineParcheggio"] == "data non presente":
+#                     parcheggioAuto = PostoMezzo(riga["tipoVeicolo"], riga["targa"], None, None)                    
+#                 elif riga["dataInizioParcheggio"] != None:
+#                     parcheggioAuto = PostoMezzo(riga["tipoVeicolo"], riga["targa"], datetime.datetime.strptime(riga["dataInizioParcheggio"], "%Y-%m-%d %H:%M:%S")) 
+#                     datiAuto.append(parcheggioAuto)
+#                 else:
+#                     parcheggioAuto = PostoMezzo(riga["tipoVeicolo"], riga["targa"], datetime.datetime.strptime(riga["dataInizioParcheggio"], "%Y-%m-%d %H:%M:%S"), datetime.datetime.strptime(riga["dataFineParcheggio"], "%Y-%m-%d %H:%M:%S"))
+#                     datiAuto.append(parcheggioAuto)
+#                     
+#             else:
+#                 self.__guadagno = float(riga["tipoVeicolo"])
+#         
+#          #ricreo le liste del parcheggio
+#         self.__postiAuto= datiAuto
+#         self.__postiMoto= datiMoto
+#         file.close()
+#         return 
             
 #FACCIO I TEST                
 if __name__ == "__main__":
@@ -202,10 +202,10 @@ if __name__ == "__main__":
     print(p.lettura())
     
     #dopo un po'
-    auto1Libera = p.libera(Auto("AS 234 DE", 5, 3, 1000))
-    print(auto1Libera)
-    moto1Libera = p.libera(Moto("TR 892 OI", 2, 1, 100))
-    print(moto1Libera)
+#     auto1Libera = p.libera(Auto("AS 234 DE", 5, 3, 1000))
+#     print(auto1Libera)
+#     moto1Libera = p.libera(Moto("TR 892 OI", 2, 1, 100))
+#     print(moto1Libera)
     print(p)
     print(p.scrittura())
     
